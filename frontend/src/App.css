@@ -6,19 +6,25 @@ html {
   box-sizing: border-box;
   font-family: 'Segoe UI', sans-serif;
   background-color: #f9f9f9;
+  height: 100%;
+  height: 100vw;
 }
 
-/* Container for everything */
+/* Main app container */
 .app {
-  padding: 2rem;
-  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 95vw;
+  min-width: none;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
 /* Header styles */
 header {
   text-align: center;
-  margin-bottom: 2rem;
+  padding: 1rem 0 0.5rem;
 }
 
 header h1 {
@@ -31,22 +37,83 @@ header p {
   color: #555;
 }
 
-/* Text area */
-textarea {
+/* Chat section */
+main {
+ 
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 150px;
+  /* leaves space for input section */
+}
+
+/* Chat messages */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 100%8;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.bubble {
+  padding: 12px;
+  border-radius: 20px;
+  max-width: 80%;
+  line-height: 1.4;
+}
+
+.user {
+  align-self: flex-end;
+  background-color: #d1e7dd;
+}
+
+.bot {
+  align-self: flex-start;
+  background-color: #f8d7da;
+}
+
+.typing {
+  white-space: pre-wrap;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Input section pinned to bottom */
+.input-section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 80vw;
+  margin: 0 auto;
+  background: #fff;
+  padding: 1rem;
+  border-top: 1px solid #ccc;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+}
+
+/* Textarea style */
+.input-section textarea {
   width: 100%;
   padding: 1rem;
   font-size: 1rem;
-  resize: vertical;
+  resize: none;
   border-radius: 8px;
   border: 1px solid #ccc;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
-  min-height: 150px;
+  min-height: 5px;
+  margin-bottom: 0.5rem;
 }
 
-/* Button */
-button {
-  margin-top: 1rem;
-  width: 100%;
+/* Buttons */
+.button-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.button-group button {
+  flex: 1;
   padding: 0.75rem 1rem;
   font-size: 1rem;
   background-color: #007bff;
@@ -57,31 +124,51 @@ button {
   transition: background 0.3s ease;
 }
 
-button:hover {
+.button-group button:hover {
   background-color: #0056b3;
 }
 
 /* Responsive tweaks */
 @media (max-width: 480px) {
   .app {
-    padding: 1rem;
-    margin: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding: 0 0.5rem;
   }
 
   header h1 {
     font-size: 1.5rem;
   }
 
-  button {
+  .input-section textarea {
     font-size: 0.95rem;
   }
 
-  textarea {
+  .button-group button {
     font-size: 0.95rem;
-    width: 80vw;
+  }
+}
+
+.thinking-loader {
+  background: #f0f0f0;
+  border-left: 4px solid #007bff;
+  padding: 10px;
+  margin: 10px 0;
+  font-style: italic;
+  color: #333;
+  font-size: 0.95rem;
+  animation: pulse 1.5s infinite ease-in-out;
+  border-radius: 5px;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.4;
   }
 }
