@@ -1,19 +1,18 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const cors = require('cors');
 
-// Serve static files from React build
-app.use(express.static(path.join(__dirname, '../frontend/build')));
+app.use(cors());
+
+
 
 // API routes (agar hai to)
 app.get('/api/hello', (req, res) => {
-  res.json({ msg: 'Hello from backend!' });
+  return res.json({ msg: 'Hello from backend!' });
 });
 
-// Catch-all route to serve React for any unknown route
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
-});
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

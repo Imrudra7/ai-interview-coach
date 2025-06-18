@@ -1,12 +1,23 @@
-import React from 'react';
+
 import './App.css';
+import React, { useEffect, useState } from 'react';
 
 function App() {
+  const [welcomeMsg, setWelcomeMsg] = useState('');
+
+  useEffect(() => {
+    
+    fetch(`${process.env.REACT_APP_API_URL}/api/hello`)
+      .then((res) => res.json())
+      .then((data) => setWelcomeMsg(data.msg))
+      .catch((err) => console.error('API Error:', err));
+  }, []);
+
   return (
     <div className="app">
       <header>
         <h1>🧠 AI Interview Coach</h1>
-        <p>Practice. Learn. Crack that Job.</p>
+        <p>{welcomeMsg || "Practice. Learn. Crack that Job."}</p>
       </header>
 
       <main>
